@@ -19,19 +19,40 @@ public class Game {
 		Scanner sc = new Scanner(System.in);
 		int scannedX;
 		int scannedY;
+		String scannedString;
 
 		while (!player.hasWon()) {
-			scannedX = sc.nextInt();
-			scannedY = sc.nextInt();
-			if(scannedX==100 && scannedX==100)
-			{
-				for (Ship ship : ships)
-				{
-					System.out.println("---sunk just now-- "+ship.name + ": "+ship.sunkJustNow()) ;
-					System.out.println("---health-- "+ship.name + ": "+ship.getHealth()) ;
+			// scannedX = sc.nextInt();
+			// scannedY = sc.nextInt();
+			scannedString = sc.next();
+
+			if (scannedString.toUpperCase().charAt(0) == 'A') {
+				scannedX = 0;
+			} else if (scannedString.toUpperCase().charAt(0) == 'B') {
+				scannedX = 1;
+			} else if (scannedString.toUpperCase().charAt(0) == 'C') {
+				scannedX = 2;
+			} else if (scannedString.toUpperCase().charAt(0) == 'D') {
+				scannedX = 3;
+			} else if (scannedString.toUpperCase().charAt(0) == 'E') {
+				scannedX = 4;
+			} else if (scannedString.toUpperCase().charAt(0) == 'F') {
+				scannedX = 5;
+			} else if (scannedString.toUpperCase().charAt(0) == 'G') {
+				scannedX = 6;
+			} else {
+				scannedX = 7;
+			}
+
+			scannedY = Character.getNumericValue(scannedString.charAt(1)) -1;
+
+			if (scannedX == 100 && scannedX == 100) {
+				for (Ship ship : ships) {
+					System.out.println("---sunk just now-- " + ship.name + ": " + ship.sunkJustNow());
+					System.out.println("---health-- " + ship.name + ": " + ship.getHealth());
 				}
 			}
-			
+
 			if (scannedX < board.getSize() && scannedY < board.getSize()) {
 				shoot(scannedX, scannedY);
 			} else {
@@ -56,7 +77,6 @@ public class Game {
 					System.out.println(ship.name + " has sunk!");
 				break;
 			}
-			
 
 		}
 		if (!shipGotHit)
