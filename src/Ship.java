@@ -5,8 +5,8 @@ public class Ship {
 	String name;
 	private List<Point> points;
 	private boolean down;
-	private boolean gotHitJustNow;
-	private int health = 3;
+	private boolean sunkJustNow;
+	public int health = 3;
 	
 	public Ship() {
 
@@ -29,7 +29,7 @@ public class Ship {
 		 *    health -= 1;
 		 *    
 		 */
-		
+		sunkJustNow=false;
 		boolean success = false;
 		for (Point point : points) {
 			if( !point.isDead())
@@ -37,6 +37,8 @@ public class Ship {
 				if (point.getX() == scannedX && point.getY() == scannedY) {
 					point.setDead(true);
 					success = true;
+					if(health==1) sunkJustNow=true;
+					health-=1;
 					return success;
 	
 				}
@@ -65,9 +67,18 @@ public class Ship {
 		this.down = down;
 	}
 
-	public boolean gotHitJustNow() {
-		
-		return false;
+	public boolean sunkJustNow() {
+		return sunkJustNow;
 	}
+
+	public int getHealth() {
+		return health;
+	}
+
+	public void setHealth(int health) {
+		this.health = health;
+	}
+
+
 
 }
